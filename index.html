@@ -18,12 +18,17 @@
         <form>
           <div class="mb-3">
             <label class="form-label">姓名</label>
-            <input name="name" type="text" class="form-control">
+            <input type="text" class="js-name form-control" readonly>
           </div>
       
           <div class="mb-3">
-            <label class="form-label">信箱</label>
-            <input name="email" type="text" class="form-control">
+            <label class="form-label">手機</label>
+            <input name="phone" type="tel" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">訂購物品</label></label>
+            <input name="item" type="tel" class="form-control">
           </div>
           
           <button type="submit" class="btn btn-primary">送出</button>
@@ -33,24 +38,25 @@
   </div>
 
   <script>
-    var sheetApiUrl = 'https://script.google.com/macros/s/AKfycbzbGd1NvnXk3mBBjOyHfWW0tvQJMZEKUuOtSu0b6nzPjcX26iSOQzra3Ne-Lq6LeRdxbg/exec';
-    var userProfile = null;
+    var sheetApiUrl = 'https://script.google.com/macros/s/AKfycbwTYski5R1GZfXU613L4Q0RPu7LVGntDVq9Kjup9Mng4ekhm06d0kK5xOS2t2ebqJNurA/exec';
+
+    var user = {};
     
     liff.init({ liffId: '1655923844-XvOMxGw1' }).then(() => {
       liff.getProfile()
         .then((profile) => {
-          userProfile = JSON.stringify(profile);
+          user.id = profile.userId;
+          user.name = profile.displayName;
+          $('.js-name').val(user.name);
         });
     });
 
     $('form').submit(function(e) {
       e.preventDefault();
       
-      var formElement = document.querySelector('form');
-      var formdata = new FormData(formElement);
-      // var formdata = new FormData();
-      // formdata.append("name", "AAA");
-      formdata.append('payload', userProfile);
+      var formdata = new FormData(document.querySelector('form'));
+      formdata.append('userId',user.id);
+      formdata.append('name', user.name);
   
       var requestOptions = {
         method: 'POST',
