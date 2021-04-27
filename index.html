@@ -33,6 +33,7 @@
   </div>
 
   <script>
+    var sheetApiUrl = 'https://script.google.com/macros/s/AKfycbxHp8S2TNXgHdWG0aG52Nds_GuTqvhn_9plBl621wUfaxWuBQs6eezlQa3KfbiHd6Ykfw/exec'
     liff.init({ liffId: '1655923844-XvOMxGw1' });
 
     $('form').submit(function(e) {
@@ -50,7 +51,7 @@
         redirect: 'follow'
       };
   
-      fetch("https://script.google.com/macros/s/AKfycbxkrLT8ZVWNpecwRR7tutkJPKiFDB3s0mwgqW9rg66C8HgRG4lUPLCrS2uFCTkM6KB9jQ/exec", requestOptions)
+      fetch(sheetApiUrl, requestOptions)
         .then(response => response.text())
         .then(result => {
           console.log(result);
