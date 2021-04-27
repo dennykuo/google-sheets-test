@@ -33,8 +33,15 @@
   </div>
 
   <script>
-    var sheetApiUrl = 'https://script.google.com/macros/s/AKfycbxHp8S2TNXgHdWG0aG52Nds_GuTqvhn_9plBl621wUfaxWuBQs6eezlQa3KfbiHd6Ykfw/exec'
-    liff.init({ liffId: '1655923844-XvOMxGw1' });
+    var sheetApiUrl = 'https://script.google.com/macros/s/AKfycbxHp8S2TNXgHdWG0aG52Nds_GuTqvhn_9plBl621wUfaxWuBQs6eezlQa3KfbiHd6Ykfw/exec';
+    var userProfile = null;
+    
+    liff.init({ liffId: '1655923844-XvOMxGw1' }).then(() => {
+      liff.getProfile()
+        .then((profile) => {
+          userProfile = JSON.stringify(profile);
+        });
+    });
 
     $('form').submit(function(e) {
       e.preventDefault();
@@ -43,7 +50,7 @@
       var formdata = new FormData(formElement);
       // var formdata = new FormData();
       // formdata.append("name", "AAA");
-      // formdata.append("phone", "11111");
+      formdata.append('payload', userProfile);
   
       var requestOptions = {
         method: 'POST',
