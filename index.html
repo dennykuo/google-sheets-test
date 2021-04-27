@@ -28,7 +28,7 @@
 
           <div class="mb-3">
             <label class="form-label">訂購物品</label></label>
-            <input name="item" type="tel" class="form-control">
+            <input name="item" type="text" class="form-control">
           </div>
           
           <button type="submit" class="btn btn-primary">送出</button>
@@ -70,6 +70,7 @@
         .then(result => {
           console.log(result);
           alert('成功');
+          $('form').reset();
         })
         .catch(error => console.log('error', error));
     });
