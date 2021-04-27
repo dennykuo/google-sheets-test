@@ -70,7 +70,7 @@
         .then(result => {
           console.log(result);
           alert('成功');
-          $('form').reset();
+          document.querySelector('form').reset();
         })
         .catch(error => console.log('error', error));
     });
