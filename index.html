@@ -42,18 +42,16 @@
 
     var user = {};
     
-    liff.init({ liffId: '1655923844-XvOMxGw1' }).then(() => {
-      if (! liff.isInClient()) {
-        return;
-      }
-
-      liff.getProfile()
-        .then((profile) => {
-          user.id = profile.userId;
-          user.name = profile.displayName;
-          $('.js-name').val(user.name);
-        });
-    });
+    if (liff.isInClient()) {
+      liff.init({ liffId: '1655923844-XvOMxGw1' }).then(() => {
+        liff.getProfile()
+          .then((profile) => {
+            user.id = profile.userId;
+            user.name = profile.displayName;
+            $('.js-name').val(user.name);
+          });
+      });
+    }
 
     $('form').submit(function(e) {
       e.preventDefault();
