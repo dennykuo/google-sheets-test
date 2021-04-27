@@ -43,6 +43,10 @@
     var user = {};
     
     liff.init({ liffId: '1655923844-XvOMxGw1' }).then(() => {
+      if (! liff.isInClient()) {
+        return;
+      }
+
       liff.getProfile()
         .then((profile) => {
           user.id = profile.userId;
